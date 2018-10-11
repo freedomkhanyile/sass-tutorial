@@ -1,0 +1,155 @@
+                // @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+
+                // How many menu items do we have?
+                $menu-items: 3;
+
+                // Colours
+                $color: #000000;
+                $background-color: #ffffff;
+                $indicator-color: #00C3FF;
+
+                // Transition Speed
+                $transition-speed: 1.3s;
+
+                // Dynamic Variables
+                $width: (100/$menu-items) * 1%; // makes each item the right size
+                $menu-items-loop-offset: $menu-items - 1; // the number of items in the menu
+
+
+                // ======================================================
+                // Step 1 - Making a Fixed Width Navigation
+                // ======================================================
+
+                .PrimaryNav {
+                @extend %cf; // clear the floats
+                list-style: none;
+                margin: 50px auto;
+                max-width: 720px; // As all measurements are using % this could be a flexible value.
+                padding: 0;
+                width: 100%;
+                   
+                }
+                .pathNav ul{
+                    border-top: 9px solid $indicator-color;
+                    height: 20px;
+                }
+
+                .Nav-item {
+                background: #fff;
+                display: block;
+                float: left;
+                margin: 0;
+                padding: 0;
+                width: $width; //dynamic width
+                text-align: center;
+
+               
+
+                &.currentStep p {
+                    color: $indicator-color;
+                }
+
+                p {
+                    color: $color;
+                    display: block;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    text-decoration: none;
+
+                    &:hover {
+                    color: $indicator-color;
+                    }
+                }
+                }
+
+
+                // ======================================================
+                // Step 2 - Making the pseudo indicator
+                // ======================================================
+
+                .with-indicator {
+                position: relative;// the menu is "relative" to the absolute position last-child pseudo elements.
+                z-index: 0;
+                
+                .Nav-item {
+                    // ======================================================
+                    // Step 2.1 - Making the indicator with the pseudo element.
+                    // ======================================================
+                    &:last-child {
+                    &:before, &:after {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        pointer-events: none;
+                        transition: left #{$transition-speed} ease;
+                    }
+                    // Making the top CSS Triangle - learn more: https://css-tricks.com/animation-css-triangles-work/
+                    &:before {
+                        border: 9px solid transparent;
+                        border-top-color: $indicator-color;
+                        width: 0;
+                        height: 0;
+                        top: 0;
+                        left: ($width/2);
+                        margin-left: -3px;
+                    }
+                    &:after {
+                        background: $indicator-color;
+                        top: -6px;
+                        bottom: -6px;
+                        left: 0;
+                        width: $width;
+                        z-index: -1;
+                    }
+
+
+                    }
+
+                }
+
+                    @for $i from 1 through $menu-items-loop-offset {
+                        // when the Nav item "is active", make the indicator line up with the navigation item.
+                        .Nav-item:nth-child(#{$i}).currentStep ~ .Nav-item:last-child:after {
+                        left:($width*$i)-$width;
+                        }
+                        .Nav-item:nth-child(#{$i}).currentStep ~ .Nav-item:last-child:before
+                        {
+                        left:($width*$i)+($width/2)-$width; // this ensures the triangle lines up to the menu.
+                        }
+                    }                 
+                   
+
+                }
+
+
+                // ======================================================
+                // The usual Global resets
+                // ======================================================
+
+                *, *:before, *:after {
+                box-sizing: border-box; // learn more: https://css-tricks.com/box-sizing/
+                }
+
+                // Extending the https://css-tricks.com/micro-clearfix/
+                %cf:before,
+                %cf:after {
+                    content: " ";
+                    display: table;
+                }
+                %cf:after {
+                    clear: both;
+                }
+
+                // Presentation Styling
+
+                // html {
+                // background-color: $background-color;
+                // font-family: 'Open Sans', sans-serif;
+                // font-weight: 800;
+                // }
+
+                // .toggle {
+                //     color: #fff;
+                //     font-family: sans-serif;
+                //     text-align: center;
+                // }
