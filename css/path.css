@@ -17,7 +17,7 @@
   float: left;
   margin: 0;
   padding: 0;
-  width: 33.33333%;
+  width: 20%;
   text-align: center;
 }
 
@@ -57,7 +57,7 @@
   width: 0;
   height: 0;
   top: 0;
-  left: 16.66667%;
+  left: 10%;
   margin-left: -3px;
 }
 
@@ -66,7 +66,7 @@
   top: -6px;
   bottom: -6px;
   left: 0;
-  width: 33.33333%;
+  width: 20%;
   z-index: -1;
 }
 
@@ -75,15 +75,31 @@
 }
 
 .with-indicator .Nav-item:nth-child(1).currentStep ~ .Nav-item:last-child:before {
-  left: 16.66667%;
+  left: 10%;
 }
 
 .with-indicator .Nav-item:nth-child(2).currentStep ~ .Nav-item:last-child:after {
-  left: 33.33333%;
+  left: 20%;
 }
 
 .with-indicator .Nav-item:nth-child(2).currentStep ~ .Nav-item:last-child:before {
+  left: 30%;
+}
+
+.with-indicator .Nav-item:nth-child(3).currentStep ~ .Nav-item:last-child:after {
+  left: 40%;
+}
+
+.with-indicator .Nav-item:nth-child(3).currentStep ~ .Nav-item:last-child:before {
   left: 50%;
+}
+
+.with-indicator .Nav-item:nth-child(4).currentStep ~ .Nav-item:last-child:after {
+  left: 60%;
+}
+
+.with-indicator .Nav-item:nth-child(4).currentStep ~ .Nav-item:last-child:before {
+  left: 70%;
 }
 
 *, *:before, *:after {
